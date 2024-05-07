@@ -1,0 +1,61 @@
+import java.util.Random;
+import javax.swing.JOptionPane;
+
+public class AdditionGameCalculatorApp {
+
+    public static void main(String[] args) {
+        
+        Random randNum = new Random();
+        int myOption;
+        int countWrong = 0, countCorrect = 0;
+        
+        JOptionPane.showMessageDialog(null, "Welcome to my Game Calculator!");
+        
+        do{    
+            int num1 = randNum.nextInt(5)+1;
+            int num2 = randNum.nextInt(5)+1;
+
+            String answer = (num1 + num2) + "";
+            String userAnswer = JOptionPane.showInputDialog("What is " + num1 + " + " + num2 + " ?");
+
+            boolean notDigit = false;
+
+            //Checking if all entered values are digits
+            for(int i = 0; i < userAnswer.length(); i++) 
+            {
+                char x = userAnswer.charAt(i); 
+                if(!Character.isDigit(x))
+                {
+                   notDigit = true;
+                } 
+            }
+
+            //If answer that is not a digit is found, display an error message
+            if (notDigit) {
+                JOptionPane.showMessageDialog(null, "You have entered wrong input!", "Error Message",JOptionPane.ERROR_MESSAGE);
+            }
+
+            //Continue with the program....
+            else 
+            {
+                 if(userAnswer.equals(answer))
+                 {
+                     countCorrect++;
+                      JOptionPane.showMessageDialog(null, "Correct answer!");
+                 }
+                 else
+                 {
+                     countWrong++;
+                     JOptionPane.showMessageDialog(null, "Wrong answer!");
+                 }
+            }
+            
+           myOption = JOptionPane.showConfirmDialog(null, "Do you want to continue?","Confirmation",JOptionPane.YES_NO_OPTION);
+           
+        }while(!(myOption == JOptionPane.NO_OPTION));   
+        
+        JOptionPane.showMessageDialog(null, "You are done!!\n" + 
+                                                        "Total correct answers: " + countCorrect + "\n"+
+                                                        "Total wrong answers: " + countWrong);
+    }
+}
